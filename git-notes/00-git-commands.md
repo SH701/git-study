@@ -152,3 +152,33 @@ git commit -m "버그 고침"
 git diff
 git diff --staged
 ```
+
+### Remote 관련
+
+```bash
+git remote -v
+git remote add upstream [URL]
+git remote remove upstream
+```
+
+### 동기화
+
+```bash
+git fetch upstream
+git pull upstream main
+git push origin branch-name
+```
+
+## 용어 정리
+
+| 용어                  | 설명                                     |
+| --------------------- | ---------------------------------------- |
+| **Fork**              | 다른 사람의 저장소를 내 계정으로 복사    |
+| **Clone**             | 원격 저장소를 로컬로 다운로드            |
+| **Origin**            | 내가 fork한 저장소 (기본 remote 이름)    |
+| **Upstream**          | 원본 저장소 (직접 추가하는 remote)       |
+| **Pull Request (PR)** | 변경사항 병합 요청                       |
+| **Merge**             | 브랜치 병합                              |
+| **Fetch**             | 원격 저장소의 변경사항 가져오기 (병합 X) |
+| **Pull**              | Fetch + Merge                            |
+| **Push**              | 로컬 변경사항을 원격에 업로드            |
