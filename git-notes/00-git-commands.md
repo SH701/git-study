@@ -48,6 +48,7 @@ git checkout -b feature/login
 
 # 브랜치 이동
 git checkout main
+git switch main
 
 # 브랜치 병합 (현재 브랜치에 다른 브랜치 합치기)
 git merge feature/login
@@ -59,11 +60,19 @@ git branch -d feature/login
 ## 원격 저장소
 
 ```bash
+# 원격 저장소 확인
+git remote -v
 # 원격 저장소 연결
 git remote add origin <저장소URL>
 
 # Push (업로드)
 git push origin main
+
+# Fetch (다운로드)
+git fetch origin main
+
+# Merge (병합)
+git merge origin/main
 
 # Pull (다운로드 + 병합)
 git pull origin main
@@ -80,7 +89,13 @@ git log --oneline
 
 # 그래프로 보기
 git log --oneline --graph --all
+
+# HEAD의 이동 기록 보기
+git reflog
+
 ```
+**참고**: git log는 "무엇을 만들었나", 
+git reflog는 "무엇을 했나"를 보여준다
 
 ## 변경사항 되돌리기
 
