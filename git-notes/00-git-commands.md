@@ -1,6 +1,6 @@
 # Git 명령어 정리
 
-## 기본 설정 (최초 1회)
+## 1. 기본 설정 (최초 1회)
 
 ```bash
 # 사용자 이름 설정
@@ -10,7 +10,9 @@ git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
 
-## 저장소 시작하기
+---
+
+## 2. 저장소 시작하기
 
 ```bash
 # 현재 폴더를 Git 저장소로 만들기
@@ -20,7 +22,9 @@ git init
 git clone <저장소URL>
 ```
 
-## 기본 작업 흐름
+---
+
+## 3. 기본 작업 흐름
 
 ```bash
 # 1. 상태 확인
@@ -37,7 +41,36 @@ git commit -m "커밋 메시지"
 git push origin main
 ```
 
-## 브랜치
+### 커밋 메시지 컨벤션
+
+#### 타입 종류
+```
+feat: 새로운 기능 추가
+fix: 버그 수정
+docs: 문서 수정
+style: 코드 포맷팅 (기능 변경 없음)
+refactor: 코드 리팩토링
+test: 테스트 코드
+chore: 빌드, 패키지 설정 등
+```
+
+#### 좋은 예시
+```bash
+git commit -m "feat: 로그인 기능 추가"
+git commit -m "fix: 회원가입 버튼 오류 수정"
+git commit -m "docs: README에 설치 방법 추가"
+```
+
+#### 나쁜 예시
+```bash
+git commit -m "수정"
+git commit -m "aaa"
+git commit -m "버그 고침"
+```
+
+---
+
+## 4. 브랜치 관리
 
 ```bash
 # 브랜치 목록 보기
@@ -57,28 +90,47 @@ git merge feature/login
 git branch -d feature/login
 ```
 
-## 원격 저장소
+---
+
+## 5. 원격 저장소 관리
+
+### 기본 명령어
 
 ```bash
 # 원격 저장소 확인
 git remote -v
+
 # 원격 저장소 연결
 git remote add origin <저장소URL>
 
+# 원격 저장소 추가 (upstream)
+git remote add upstream [URL]
+
+# 원격 저장소 제거
+git remote remove upstream
+```
+
+### Push / Pull / Fetch
+
+```bash
 # Push (업로드)
 git push origin main
 
-# Fetch (다운로드)
+# Fetch (다운로드만)
 git fetch origin main
-
-# Merge (병합)
-git merge origin/main
+git fetch upstream
 
 # Pull (다운로드 + 병합)
 git pull origin main
+git pull upstream main
+
+# Merge (병합)
+git merge origin/main
 ```
 
-## 히스토리 확인
+---
+
+## 6. 히스토리 확인
 
 ```bash
 # 커밋 히스토리 보기
@@ -92,12 +144,25 @@ git log --oneline --graph --all
 
 # HEAD의 이동 기록 보기
 git reflog
-
 ```
-**참고**: git log는 "무엇을 만들었나", 
-git reflog는 "무엇을 했나"를 보여준다
 
-## 변경사항 되돌리기
+> **참고**: `git log`는 "무엇을 만들었나", `git reflog`는 "무엇을 했나"를 보여줍니다.
+
+---
+
+## 7. 변경사항 확인
+
+```bash
+# 작업 디렉토리의 변경사항 확인
+git diff
+
+# Staging Area의 변경사항 확인
+git diff --staged
+```
+
+---
+
+## 8. 변경사항 되돌리기
 
 ```bash
 # add 취소 (staging → working directory)
@@ -113,7 +178,9 @@ git reset HEAD~1
 git merge --abort
 ```
 
-## 충돌 해결 과정
+---
+
+## 9. 충돌 해결 과정
 
 ```bash
 # 1. merge 시도
@@ -133,58 +200,9 @@ git add .
 git commit
 ```
 
-### 타입 종류
+---
 
-```
-feat: 새로운 기능 추가
-fix: 버그 수정
-docs: 문서 수정
-style: 코드 포맷팅 (기능 변경 없음)
-refactor: 코드 리팩토링
-test: 테스트 코드
-chore: 빌드, 패키지 설정 등
-```
-
-### 좋은 예시
-
-```bash
-git commit -m "feat: 로그인 기능 추가"
-git commit -m "fix: 회원가입 버튼 오류 수정"
-git commit -m "docs: README에 설치 방법 추가"
-```
-
-### 나쁜 예시
-
-```bash
-git commit -m "수정"
-git commit -m "aaa"
-git commit -m "버그 고침"
-```
-
-## 변경사항 비교
-
-```bash
-git diff
-git diff --staged
-```
-
-### Remote 관련
-
-```bash
-git remote -v
-git remote add upstream [URL]
-git remote remove upstream
-```
-
-### 동기화
-
-```bash
-git fetch upstream
-git pull upstream main
-git push origin branch-name
-```
-
-## 작업 임시 저장 (stash)
+## 10. 작업 임시 저장 (Stash)
 
 ```bash
 # 현재 작업 임시 저장
@@ -206,17 +224,19 @@ git stash drop stash@{0}
 git stash clear
 ```
 
+---
 
 ## 용어 정리
 
-| 용어                  | 설명                                     |
-| --------------------- | ---------------------------------------- |
-| **Fork**              | 다른 사람의 저장소를 내 계정으로 복사    |
-| **Clone**             | 원격 저장소를 로컬로 다운로드            |
-| **Origin**            | 내가 fork한 저장소 (기본 remote 이름)    |
-| **Upstream**          | 원본 저장소 (직접 추가하는 remote)       |
-| **Pull Request (PR)** | 변경사항 병합 요청                       |
-| **Merge**             | 브랜치 병합                              |
-| **Fetch**             | 원격 저장소의 변경사항 가져오기 (병합 X) |
-| **Pull**              | Fetch + Merge                            |
-| **Push**              | 로컬 변경사항을 원격에 업로드            |
+| 용어 | 설명 |
+|------|------|
+| **Fork** | 다른 사람의 저장소를 내 계정으로 복사 |
+| **Clone** | 원격 저장소를 로컬로 다운로드 |
+| **Origin** | 내가 fork한 저장소 (기본 remote 이름) |
+| **Upstream** | 원본 저장소 (직접 추가하는 remote) |
+| **Pull Request (PR)** | 변경사항 병합 요청 |
+| **Merge** | 브랜치 병합 |
+| **Fetch** | 원격 저장소의 변경사항 가져오기 (병합 X) |
+| **Pull** | Fetch + Merge |
+| **Push** | 로컬 변경사항을 원격에 업로드 |
+| **Stash** | 작업 중인 변경사항을 임시로 저장 |
