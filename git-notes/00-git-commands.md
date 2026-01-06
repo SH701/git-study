@@ -184,6 +184,29 @@ git pull upstream main
 git push origin branch-name
 ```
 
+## 작업 임시 저장 (stash)
+
+```bash
+# 현재 작업 임시 저장
+git stash
+
+# 저장 목록 보기
+git stash list
+
+# 가장 최근 저장 불러오기
+git stash pop
+
+# 특정 stash 불러오기
+git stash apply stash@{0}
+
+# stash 삭제
+git stash drop stash@{0}
+
+# 모든 stash 삭제
+git stash clear
+```
+
+
 ## 용어 정리
 
 | 용어                  | 설명                                     |
